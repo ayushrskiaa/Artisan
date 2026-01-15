@@ -27,6 +27,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Artisan API is running...', status: 'Healthy 🎨' });
+});
+
 app.use('/api/paintings', paintingRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/users', userRoutes);
