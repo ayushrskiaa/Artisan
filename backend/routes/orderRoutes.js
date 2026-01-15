@@ -5,12 +5,20 @@ const { protect, admin } = require('../middleware/authMiddleware');
 
 // @desc    Create new order
 router.post('/', protect, async (req, res) => {
-    const { orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
+    try {
+        console.log('=== ORDER CREATION REQUEST ===');
+        console.log('User:', req.user);
+        console.log('Request Body:', JSON.stringify(req.body, null, 2));
+        
+        const { orderItems, shippingAddress, paymentMethod, totalPrice } = req.body;
 
-    if (orderItems && orderItems.length === 0) {
-        res.status(400).json({ message: 'No order items' });
-        return;
-    } else {
+        if (orderItems && orderItems.length === 0) {
+            console.log('ERROR: No order items');
+            res.status(400).json({ message: 'No order items' });
+            return;
+        }
+
+        console.log('Creating order object...');
         const order = new Order({
             user: req.user._id,
             orderItems,
@@ -19,8 +27,16 @@ router.post('/', protect, async (req, res) => {
             totalPrice
         });
 
+        console.log('Saving order to database...');
         const createdOrder = await order.save();
+        console.log('Order created successfully:', createdOrder._id);
         res.status(201).json(createdOrder);
+    } catch (error) {
+        console.error('=== ORDER CREATION ERROR ===');
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+        console.error('Full error:', error);
+        res.status(500).json({ message: error.message, details: error });
     }
 });
 
@@ -35,7 +51,15 @@ router.get('/', protect, admin, async (req, res) => {
     }
 });
 
+// @desc    Get logged in user orders
+// @route   GET /api/orders/myorders
+router.get('/myorders', protect, async (req, res) => {
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+    res.json(orders);
+});
+
 // @desc    Get order by ID
+// @route   GET /api/orders/:id
 router.get('/:id', protect, async (req, res) => {
     const order = await Order.findById(req.params.id).populate('user', 'name email');
 
@@ -44,12 +68,6 @@ router.get('/:id', protect, async (req, res) => {
     } else {
         res.status(404).json({ message: 'Order not found' });
     }
-});
-
-// @desc    Get logged in user orders
-router.get('/myorders', protect, async (req, res) => {
-    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
-    res.json(orders);
 });
 
 // @desc    Update order to paid

@@ -30,7 +30,12 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = () => setCartItems([]);
 
-    const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+    const cartTotal = cartItems.reduce((total, item) => {
+        const itemPrice = item.discount > 0
+            ? (item.price - (item.price * item.discount / 100))
+            : item.price;
+        return total + itemPrice;
+    }, 0);
 
     const isInCart = (productId) => {
         return cartItems.some((item) => item._id === productId);

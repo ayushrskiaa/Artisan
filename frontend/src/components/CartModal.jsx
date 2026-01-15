@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trash2, CreditCard, MapPin, Loader2 } from 'lucide-react';
+import { X, Trash2, CreditCard, MapPin, Loader2, Banknote } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
@@ -12,6 +12,7 @@ const CartModal = ({ isOpen, onClose }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [showAddress, setShowAddress] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState('');
 
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
@@ -29,6 +30,12 @@ const CartModal = ({ isOpen, onClose }) => {
 
     const processOrder = async (e) => {
         e.preventDefault();
+
+        if (!paymentMethod) {
+            alert('Please select a payment method');
+            return;
+        }
+
         setLoading(true);
 
         try {
@@ -44,24 +51,33 @@ const CartModal = ({ isOpen, onClose }) => {
                     title: item.title,
                     qty: 1,
                     imageUrl: item.imageUrl,
-                    price: item.price,
+                    price: item.discount > 0
+                        ? (item.price - (item.price * item.discount / 100))
+                        : item.price,
                     painting: item._id
                 })),
                 shippingAddress: { address, city, postalCode, country },
-                paymentMethod: 'Stripe',
+                paymentMethod: paymentMethod,
                 totalPrice: cartTotal
             };
 
-            // 1. Create Order in Backend
+            console.log('Order Data:', orderData);
+
+            // Create Order in Backend
             const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
 
-            // 2. Initiate Stripe Payment (Simulated for this demo, or call real stripe)
-            // For now, let's redirect to success since we don't have real keys configured
-            alert('Order placed successfully! Redirecting to payment...');
-
-            clearCart();
-            onClose();
-            navigate('/success');
+            if (paymentMethod === 'COD') {
+                alert('Order placed successfully! You will pay on delivery.');
+                clearCart();
+                onClose();
+                navigate('/success');
+            } else {
+                // Stripe Payment - redirect to success for now
+                alert('Order placed successfully! Redirecting to payment...');
+                clearCart();
+                onClose();
+                navigate('/success');
+            }
 
         } catch (error) {
             console.error('Checkout error:', error);
@@ -113,7 +129,12 @@ const CartModal = ({ isOpen, onClose }) => {
                                                 <div className="flex-grow">
                                                     <h3 className="font-bold text-sm tracking-wide">{item.title}</h3>
                                                     <p className="text-xs text-neutral-400 italic mt-1">{item.artist}</p>
-                                                    <p className="text-accent font-bold mt-2">₹{item.price.toLocaleString()}</p>
+                                                    <p className="text-accent font-bold mt-2">
+                                                        ₹{(item.discount > 0
+                                                            ? (item.price - (item.price * item.discount / 100))
+                                                            : item.price
+                                                        ).toLocaleString()}
+                                                    </p>
                                                 </div>
                                                 <button
                                                     onClick={() => removeFromCart(item._id)}
@@ -159,6 +180,38 @@ const CartModal = ({ isOpen, onClose }) => {
                                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-accent"
                                         value={country} onChange={(e) => setCountry(e.target.value)}
                                     />
+
+                                    {/* Payment Method Selection */}
+                                    <div className="pt-4 border-t border-white/10">
+                                        <div className="flex items-center gap-2 mb-4 text-accent">
+                                            <CreditCard className="w-5 h-5" />
+                                            <span className="text-sm font-bold uppercase tracking-widest">Payment Method</span>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <button
+                                                type="button"
+                                                onClick={() => setPaymentMethod('Stripe')}
+                                                className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all cursor-pointer ${paymentMethod === 'Stripe'
+                                                    ? 'border-accent bg-accent/10 text-accent'
+                                                    : 'border-white/10 bg-white/5 text-neutral-400 hover:border-white/30'
+                                                    }`}
+                                            >
+                                                <CreditCard className="w-6 h-6" />
+                                                <span className="text-xs font-bold">Card Payment</span>
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setPaymentMethod('COD')}
+                                                className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all cursor-pointer ${paymentMethod === 'COD'
+                                                    ? 'border-accent bg-accent/10 text-accent'
+                                                    : 'border-white/10 bg-white/5 text-neutral-400 hover:border-white/30'
+                                                    }`}
+                                            >
+                                                <Banknote className="w-6 h-6" />
+                                                <span className="text-xs font-bold">Cash on Delivery</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
                             )}
                         </div>
@@ -182,9 +235,14 @@ const CartModal = ({ isOpen, onClose }) => {
                                     <button
                                         form="address-form"
                                         disabled={loading}
-                                        className="w-full bg-accent hover:bg-accent/90 text-neutral-900 font-bold py-4 rounded-full flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                                        className="w-full bg-accent hover:bg-accent/90 text-neutral-900 font-bold py-4 rounded-full flex items-center justify-center gap-2 transition-all disabled:opacity-50 cursor-pointer"
                                     >
-                                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <><CreditCard className="w-5 h-5" /> Pay Now</>}
+                                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                                            <>
+                                                {paymentMethod === 'COD' ? <Banknote className="w-5 h-5" /> : <CreditCard className="w-5 h-5" />}
+                                                {paymentMethod === 'COD' ? 'Place Order (COD)' : 'Pay Now'}
+                                            </>
+                                        )}
                                     </button>
                                 )}
 
