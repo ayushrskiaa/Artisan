@@ -48,7 +48,9 @@ router.delete('/:id', protect, admin, async (req, res) => {
 // @route   POST /api/paintings
 router.post('/', protect, admin, upload.single('image'), async (req, res) => {
     try {
-        const { title, price, description, artist, category, isFeatured, isMasterpiece } = req.body;
+        console.log('--- CREATE PAINTING ---');
+        console.log('Body:', req.body);
+        const { title, price, description, artist, category, isFeatured, isMasterpiece, discount } = req.body;
         
         const painting = new Painting({
             title,
@@ -58,6 +60,7 @@ router.post('/', protect, admin, upload.single('image'), async (req, res) => {
             category,
             isFeatured: isFeatured === 'true' || isFeatured === true,
             isMasterpiece: isMasterpiece === 'true' || isMasterpiece === true,
+            discount: Number(discount) || 0,
             imageUrl: req.file ? req.file.path : ''
         });
 
@@ -76,7 +79,11 @@ router.post('/', protect, admin, upload.single('image'), async (req, res) => {
 // @route   PUT /api/paintings/:id
 router.put('/:id', protect, admin, upload.single('image'), async (req, res) => {
     try {
-        const { title, price, description, artist, category, isFeatured, isMasterpiece } = req.body;
+        console.log('--- UPDATE PAINTING ---');
+        console.log('ID:', req.params.id);
+        console.log('Body:', req.body);
+        console.log('File:', req.file);
+        const { title, price, description, artist, category, isFeatured, isMasterpiece, discount } = req.body;
         const painting = await Painting.findById(req.params.id);
 
         if (painting) {
@@ -85,6 +92,7 @@ router.put('/:id', protect, admin, upload.single('image'), async (req, res) => {
             painting.description = description || painting.description;
             painting.artist = artist || painting.artist;
             painting.category = category || painting.category;
+            painting.discount = discount !== undefined ? Number(discount) : painting.discount;
             if (isFeatured !== undefined) {
                 painting.isFeatured = String(isFeatured) === 'true';
             }

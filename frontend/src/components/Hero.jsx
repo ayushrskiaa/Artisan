@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Hero = ({ masterpiece }) => {
+    const { addToCart, cartItems } = useCart();
+    const isInCart = masterpiece ? cartItems.some(item => item._id === masterpiece._id) : false;
+
     return (
         <div className="relative min-h-[95vh] flex items-center pt-28 pb-12 overflow-hidden">
             {/* Background Abstract shapes */}
@@ -26,17 +30,39 @@ const Hero = ({ masterpiece }) => {
                                 : "Explore an exclusive collection of contemporary paintings crafted by master artists. Modern art that speaks to your soul and transforms your space."}
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Link
-                                to="/gallery"
-                                className="bg-accent hover:bg-accent/90 text-neutral-900 px-8 py-4 rounded-full font-bold flex items-center group transition-all"
-                            >
-                                View Collection
-                                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                            {masterpiece && (
-                                <Link to={`/painting/${masterpiece._id}`} className="border border-white/20 hover:border-white/40 px-8 py-4 rounded-full font-bold transition-all">
-                                    View Masterpiece
-                                </Link>
+                            {!masterpiece ? (
+                                <>
+                                    <Link
+                                        to="/gallery"
+                                        className="bg-accent hover:bg-accent/90 text-neutral-900 px-8 py-4 rounded-full font-bold flex items-center group transition-all"
+                                    >
+                                        View Collection
+                                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </Link>
+                                    <Link to="/gallery" className="border border-white/20 hover:border-white/40 px-8 py-4 rounded-full font-bold transition-all">
+                                        Learn More
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <button
+                                        onClick={() => addToCart(masterpiece)}
+                                        disabled={isInCart}
+                                        className={`px-8 py-4 rounded-full font-bold flex items-center gap-3 transition-all ${isInCart
+                                            ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5'
+                                            : 'bg-accent hover:bg-accent/90 text-neutral-900 shadow-[0_0_20px_rgba(212,175,55,0.3)]'
+                                            }`}
+                                    >
+                                        <ShoppingBag className="w-5 h-5" />
+                                        {isInCart ? 'In Your Collection' : 'Add to Collection'}
+                                    </button>
+                                    <Link
+                                        to={`/painting/${masterpiece._id}`}
+                                        className="border border-white/20 hover:border-white/40 px-8 py-4 rounded-full font-bold transition-all hover:bg-white/5"
+                                    >
+                                        Examine Details
+                                    </Link>
+                                </>
                             )}
                         </div>
                     </motion.div>
@@ -47,7 +73,7 @@ const Hero = ({ masterpiece }) => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="relative"
                     >
-                        <div className="aspect-[3/2] rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative group">
+                        <div className="aspect-[6/5] rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative group">
                             <img
                                 src={masterpiece?.imageUrl || "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000&auto=format&fit=crop"}
                                 alt={masterpiece?.title || "Main Art"}
@@ -58,6 +84,17 @@ const Hero = ({ masterpiece }) => {
                                     {masterpiece ? "Masterpiece of the Month" : "Exclusive"}
                                 </p>
                                 <h3 className="text-xl font-bold mb-1">{masterpiece?.title || "Midnight Serenity"}</h3>
+                                <div className="flex items-center gap-3 mb-1">
+                                    {masterpiece?.discount > 0 ? (
+                                        <>
+                                            <span className="text-accent font-bold text-lg">₹{(masterpiece.price - (masterpiece.price * masterpiece.discount / 100)).toLocaleString()}</span>
+                                            <span className="text-neutral-500 line-through text-xs font-bold">₹{masterpiece.price.toLocaleString()}</span>
+                                            <span className="bg-red-500 text-white text-[9px] px-2 py-0.5 rounded-full font-black animate-pulse">-{masterpiece.discount}% OFF</span>
+                                        </>
+                                    ) : (
+                                        <span className="text-accent font-bold text-lg">₹{masterpiece?.price.toLocaleString() || "4,500"}</span>
+                                    )}
+                                </div>
                                 <p className="text-neutral-400 text-sm italic">By {masterpiece?.artist || "Alexander Thorne"}</p>
                             </div>
                         </div>

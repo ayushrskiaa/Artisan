@@ -23,7 +23,8 @@ const EditPainting = () => {
         category: 'Abstract',
         description: '',
         isFeatured: false,
-        isMasterpiece: false
+        isMasterpiece: false,
+        discount: 0
     });
 
     useEffect(() => {
@@ -39,7 +40,8 @@ const EditPainting = () => {
                         category: data.category,
                         description: data.description || '',
                         isFeatured: data.isFeatured,
-                        isMasterpiece: data.isMasterpiece || false
+                        isMasterpiece: data.isMasterpiece || false,
+                        discount: data.discount || 0
                     });
                     setPreview(data.imageUrl);
                 } catch (error) {
@@ -100,7 +102,11 @@ const EditPainting = () => {
                     <ArrowLeft className="w-6 h-6" />
                 </Link>
                 <h1 className="text-4xl font-bold title-font text-white">
-                    {isNew ? 'New <span class="text-accent italic">Entry</span>' : 'Edit <span class="text-accent italic">Exhibition</span>'}
+                    {isNew ? (
+                        <>New <span className="text-accent italic">Entry</span></>
+                    ) : (
+                        <>Edit <span className="text-accent italic">Exhibition</span></>
+                    )}
                 </h1>
             </div>
 
@@ -159,9 +165,9 @@ const EditPainting = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-600 mb-3">Valuation ($)</label>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-600 mb-3">Valuation (₹)</label>
                             <input
                                 type="number"
                                 required
@@ -171,7 +177,18 @@ const EditPainting = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-600 mb-3">Category Classification</label>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-600 mb-3">Discount (%)</label>
+                            <input
+                                type="number"
+                                min="0"
+                                max="100"
+                                placeholder="0"
+                                className="w-full bg-white/[0.03] border border-white/10 rounded-2xl px-5 py-4 focus:border-accent focus:outline-none transition-all font-bold text-red-400 placeholder:text-neutral-700/50"
+                                value={form.discount} onChange={e => setForm({ ...form, discount: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-widest text-neutral-600 mb-3">Category</label>
                             <select
                                 className="w-full bg-[#111] border border-white/10 rounded-2xl px-5 py-4 focus:border-accent focus:outline-none transition-all cursor-pointer font-bold"
                                 value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}

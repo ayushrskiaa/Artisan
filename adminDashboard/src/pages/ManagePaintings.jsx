@@ -129,7 +129,16 @@ const ManagePaintings = () => {
                                             </span>
                                         </td>
                                         <td className="px-8 py-6">
-                                            <div className="font-bold text-accent text-lg">${painting.price.toLocaleString()}</div>
+                                            <div className="flex flex-col">
+                                                <div className="font-bold text-accent text-lg">
+                                                    ₹{painting.discount > 0
+                                                        ? (painting.price - (painting.price * painting.discount / 100)).toLocaleString()
+                                                        : painting.price.toLocaleString()}
+                                                </div>
+                                                {painting.discount > 0 && (
+                                                    <div className="text-[10px] text-neutral-500 line-through">₹{painting.price.toLocaleString()}</div>
+                                                )}
+                                            </div>
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col gap-2">
@@ -137,8 +146,8 @@ const ManagePaintings = () => {
                                                     onClick={() => toggleFeatured(painting)}
                                                     disabled={toggling === painting._id}
                                                     className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit ${painting.isFeatured
-                                                            ? 'bg-accent/10 border-accent/40 text-accent'
-                                                            : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-white/30'
+                                                        ? 'bg-accent/10 border-accent/40 text-accent'
+                                                        : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-white/30'
                                                         }`}
                                                 >
                                                     {toggling === painting._id ? (
@@ -153,8 +162,8 @@ const ManagePaintings = () => {
                                                     onClick={() => setAsMasterpiece(painting)}
                                                     disabled={painting.isMasterpiece || toggling === ('m-' + painting._id)}
                                                     className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit ${painting.isMasterpiece
-                                                            ? 'bg-white text-black border-white'
-                                                            : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-accent/40'
+                                                        ? 'bg-white text-black border-white'
+                                                        : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-accent/40'
                                                         }`}
                                                 >
                                                     {toggling === ('m-' + painting._id) ? (

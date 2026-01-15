@@ -39,8 +39,20 @@ const PaintingCard = ({ painting }) => {
                         <Eye className="w-5 h-5" />
                     </Link>
                 </div>
-                <div className="absolute top-4 right-4 bg-accent text-neutral-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                    ${painting.price}
+                {painting.discount > 0 && (
+                    <div className="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg uppercase tracking-widest animate-pulse">
+                        Offer -{painting.discount}%
+                    </div>
+                )}
+                <div className="absolute top-4 right-4 bg-accent/90 backdrop-blur-md text-neutral-900 text-xs font-bold px-3 py-1 rounded-full shadow-lg flex flex-col items-end">
+                    {painting.discount > 0 ? (
+                        <>
+                            <span className="line-through opacity-50 text-[10px] leading-none mb-1">₹{painting.price.toLocaleString()}</span>
+                            <span>₹{(painting.price - (painting.price * painting.discount / 100)).toLocaleString()}</span>
+                        </>
+                    ) : (
+                        <span>₹{painting.price.toLocaleString()}</span>
+                    )}
                 </div>
             </div>
             <div>

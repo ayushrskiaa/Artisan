@@ -51,8 +51,24 @@ const PaintingDetail = () => {
                         {painting.description || "A breathtaking contemporary piece that explores the boundaries of emotion and technique. Each brushstroke is carefully placed to create a harmonious yet striking composition that commands attention in any space."}
                     </p>
 
-                    <div className="text-4xl font-bold text-accent">
-                        ${painting.price}
+                    <div className="flex items-center gap-4">
+                        {painting.discount > 0 ? (
+                            <>
+                                <div className="text-4xl font-bold text-accent">
+                                    ₹{(painting.price - (painting.price * painting.discount / 100)).toLocaleString()}
+                                </div>
+                                <div className="text-xl text-neutral-500 line-through mt-2">
+                                    ₹{painting.price.toLocaleString()}
+                                </div>
+                                <div className="bg-red-500 text-white text-xs font-black px-3 py-1 rounded-full animate-pulse">
+                                    -{painting.discount}% OFF
+                                </div>
+                            </>
+                        ) : (
+                            <div className="text-4xl font-bold text-accent">
+                                ₹{painting.price.toLocaleString()}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4">
