@@ -16,7 +16,7 @@ const OrderHistory = () => {
                             Authorization: `Bearer ${user.token}`
                         }
                     };
-                    const { data } = await axios.get('http://localhost:5000/api/orders/myorders', config);
+                    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/orders/myorders`, config);
                     setOrders(data);
                 } catch (error) {
                     console.error('Error fetching orders:', error);
@@ -49,7 +49,7 @@ const OrderHistory = () => {
                                 </div>
                                 <div>
                                     <p className="text-xs text-neutral-500 uppercase tracking-widest mb-1">Total</p>
-                                    <p className="font-bold text-accent">${order.totalPrice}</p>
+                                    <p className="font-bold text-accent">₹{order.totalPrice.toLocaleString()}</p>
                                 </div>
                                 <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/5">
                                     {order.isPaid ? (
@@ -69,7 +69,7 @@ const OrderHistory = () => {
                                             </div>
                                             <div>
                                                 <p className="font-bold">{item.title}</p>
-                                                <p className="text-sm text-neutral-400 font-bold">${item.price}</p>
+                                                <p className="text-sm text-neutral-400 font-bold">₹{item.price.toLocaleString()}</p>
                                             </div>
                                         </div>
                                     ))}

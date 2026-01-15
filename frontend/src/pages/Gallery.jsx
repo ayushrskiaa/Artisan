@@ -13,7 +13,7 @@ const Gallery = () => {
     useEffect(() => {
         const fetchPaintings = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/paintings');
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/paintings`);
                 setPaintings(response.data);
             } catch (error) {
                 console.error('Error fetching paintings:', error);
@@ -63,8 +63,8 @@ const Gallery = () => {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`whitespace-nowrap px-6 py-4 rounded-full font-bold text-sm transition-all border ${selectedCategory === cat
-                                    ? 'bg-accent text-neutral-900 border-accent'
-                                    : 'border-white/10 text-neutral-400 hover:border-white/30'
+                                ? 'bg-accent text-neutral-900 border-accent'
+                                : 'border-white/10 text-neutral-400 hover:border-white/30'
                                 }`}
                         >
                             {cat}

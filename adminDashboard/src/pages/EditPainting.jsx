@@ -9,7 +9,7 @@ const EditPainting = () => {
     const isNew = !id;
     const navigate = useNavigate();
     const { user } = useAuth();
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const [loading, setLoading] = useState(false);
     const [fetching, setFetching] = useState(false);

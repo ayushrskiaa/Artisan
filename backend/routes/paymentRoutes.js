@@ -9,17 +9,23 @@ const stripe = require('stripe')(stripeApiKey || 'sk_test_placeholder');
 router.post('/create-checkout-session', async (req, res) => {
     const { items } = req.body;
 
-    const line_items = items.map((item) => ({
-        price_data: {
-            currency: 'usd',
-            product_data: {
-                name: item.title,
-                images: [item.imageUrl],
+    const line_items = items.map((item) => {
+        const finalPrice = item.discount > 0 
+            ? (item.price - (item.price * item.discount / 100)) 
+            : item.price;
+            
+        return {
+            price_data: {
+                currency: 'inr',
+                product_data: {
+                    name: item.title,
+                    images: [item.imageUrl],
+                },
+                unit_amount: Math.round(finalPrice * 100), // Stripe expects amount in paise
             },
-            unit_amount: item.price * 100, // Stripe expects amount in cents
-        },
-        quantity: 1,
-    }));
+            quantity: 1,
+        };
+    });
 
     try {
         const session = await stripe.checkout.sessions.create({

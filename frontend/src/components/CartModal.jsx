@@ -53,7 +53,7 @@ const CartModal = ({ isOpen, onClose }) => {
             };
 
             // 1. Create Order in Backend
-            const { data } = await axios.post('http://localhost:5000/api/orders', orderData, config);
+            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
 
             // 2. Initiate Stripe Payment (Simulated for this demo, or call real stripe)
             // For now, let's redirect to success since we don't have real keys configured
@@ -113,7 +113,7 @@ const CartModal = ({ isOpen, onClose }) => {
                                                 <div className="flex-grow">
                                                     <h3 className="font-bold text-sm tracking-wide">{item.title}</h3>
                                                     <p className="text-xs text-neutral-400 italic mt-1">{item.artist}</p>
-                                                    <p className="text-accent font-bold mt-2">${item.price}</p>
+                                                    <p className="text-accent font-bold mt-2">₹{item.price.toLocaleString()}</p>
                                                 </div>
                                                 <button
                                                     onClick={() => removeFromCart(item._id)}
@@ -167,7 +167,7 @@ const CartModal = ({ isOpen, onClose }) => {
                             <div className="p-6 border-t border-white/10 space-y-4 bg-zinc-950/50 backdrop-blur-xl">
                                 <div className="flex justify-between items-center">
                                     <span className="text-neutral-400 uppercase text-xs tracking-[0.2em]">Total Amount</span>
-                                    <span className="text-2xl font-bold">${cartTotal}</span>
+                                    <span className="text-2xl font-bold">₹{cartTotal.toLocaleString()}</span>
                                 </div>
 
                                 {!showAddress ? (

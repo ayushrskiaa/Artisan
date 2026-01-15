@@ -11,7 +11,7 @@ const Dashboard = () => {
         totalRevenue: 0
     });
     const { user } = useAuth();
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -39,7 +39,7 @@ const Dashboard = () => {
     const statCards = [
         { title: 'Paintings', value: stats.totalPaintings, icon: Palette, color: 'text-accent', bg: 'bg-accent/10', link: '/paintings' },
         { title: 'Orders', value: stats.totalOrders, icon: ShoppingBag, color: 'text-blue-400', bg: 'bg-blue-400/10', link: '/orders' },
-        { title: 'Net Revenue', value: `$${stats.totalRevenue}`, icon: TrendingUp, color: 'text-green-400', bg: 'bg-green-400/10', link: '/orders' },
+        { title: 'Net Revenue', value: `₹${stats.totalRevenue.toLocaleString()}`, icon: TrendingUp, color: 'text-green-400', bg: 'bg-green-400/10', link: '/orders' },
     ];
 
     return (

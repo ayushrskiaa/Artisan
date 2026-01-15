@@ -8,7 +8,7 @@ const ManagePaintings = () => {
     const [paintings, setPaintings] = useState([]);
     const [toggling, setToggling] = useState(null);
     const { user } = useAuth();
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const fetchPaintings = async () => {
         try {

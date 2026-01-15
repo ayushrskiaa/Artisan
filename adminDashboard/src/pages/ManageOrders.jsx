@@ -6,7 +6,7 @@ import { Truck, CheckCircle, Clock, ExternalLink, PackageOpen, LayoutList } from
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
     const { user } = useAuth();
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = import.meta.env.VITE_API_URL;
 
     const fetchOrders = async () => {
         try {
@@ -85,7 +85,7 @@ const ManageOrders = () => {
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col gap-1">
-                                                <div className="font-bold text-accent text-lg">${order.totalPrice.toLocaleString()}</div>
+                                                <div className="font-bold text-accent text-lg">₹{order.totalPrice.toLocaleString()}</div>
                                                 <div className="flex items-center gap-2">
                                                     {order.isPaid ? (
                                                         <div className="flex items-center gap-1.5 text-green-500 font-bold text-[9px] uppercase tracking-widest bg-green-500/10 px-2 py-0.5 rounded-full border border-green-500/20">

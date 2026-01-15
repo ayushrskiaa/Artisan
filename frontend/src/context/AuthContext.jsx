@@ -12,13 +12,13 @@ export const AuthProvider = ({ children }) => {
     });
 
     const login = async (email, password) => {
-        const { data } = await axios.post('http://localhost:5000/api/users/login', { email, password });
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, { email, password });
         setUser(data);
         localStorage.setItem('userInfo', JSON.stringify(data));
     };
 
     const register = async (name, email, password) => {
-        const { data } = await axios.post('http://localhost:5000/api/users', { name, email, password });
+        const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/users`, { name, email, password });
         setUser(data);
         localStorage.setItem('userInfo', JSON.stringify(data));
     };

@@ -13,7 +13,7 @@ const Home = () => {
     useEffect(() => {
         const fetchArt = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/paintings');
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/paintings`);
                 console.log('All paintings:', response.data);
                 setFeaturedPaintings(response.data.filter(p => p.isFeatured));
                 const foundMasterpiece = response.data.find(p => p.isMasterpiece);
