@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const PaintingDetail = () => {
     const { id } = useParams();
     const [painting, setPainting] = useState(null);
-    const { addToCart } = useCart();
+    const { addToCart, isInCart } = useCart();
 
     useEffect(() => {
         const fetchPainting = async () => {
@@ -23,6 +23,8 @@ const PaintingDetail = () => {
     }, [id]);
 
     if (!painting) return <div className="pt-40 text-center min-h-screen">Loading masterpiece...</div>;
+
+    const inCart = isInCart(painting._id);
 
     return (
         <div className="pt-32 pb-20 px-4 max-w-7xl mx-auto min-h-screen">
@@ -73,11 +75,15 @@ const PaintingDetail = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                         <button
-                            onClick={() => addToCart(painting)}
-                            className="bg-accent text-neutral-900 px-10 py-5 rounded-full font-bold flex items-center justify-center gap-3 hover:bg-accent/90 transition-all flex-grow text-lg"
+                            onClick={() => !inCart && addToCart(painting)}
+                            disabled={inCart}
+                            className={`px-10 py-5 rounded-full font-bold flex items-center justify-center gap-3 transition-all flex-grow text-lg ${inCart
+                                    ? 'bg-neutral-700 text-neutral-400 cursor-not-allowed'
+                                    : 'bg-accent text-neutral-900 hover:bg-accent/90'
+                                }`}
                         >
                             <ShoppingCart className="w-6 h-6" />
-                            Add to Collection
+                            {inCart ? 'Already in Collection' : 'Add to Collection'}
                         </button>
                     </div>
 

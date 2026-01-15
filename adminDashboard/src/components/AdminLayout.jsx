@@ -36,7 +36,7 @@ const AdminLayout = ({ children }) => {
         <div className="flex h-screen bg-[#050505] text-white overflow-hidden font-inter">
             {sidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden"
+                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] lg:hidden cursor-pointer"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
@@ -89,7 +89,7 @@ const AdminLayout = ({ children }) => {
 
                         <button
                             onClick={handleLogout}
-                            className="w-full flex items-center gap-3 px-6 py-4 text-sm text-red-500 hover:bg-red-500/10 rounded-2xl transition-all font-bold"
+                            className="w-full flex items-center gap-3 px-6 py-4 text-sm text-red-500 hover:bg-red-500/10 rounded-2xl transition-all font-bold cursor-pointer"
                         >
                             <LogOut className="w-5 h-5" /> Logout
                         </button>
@@ -101,7 +101,7 @@ const AdminLayout = ({ children }) => {
                 <header className="h-20 lg:h-24 flex items-center justify-between px-6 lg:px-12 border-b border-white/5 bg-[#0a0a0a]/50 backdrop-blur-xl shrink-0">
                     <button
                         onClick={() => setSidebarOpen(true)}
-                        className="p-3 lg:hidden text-neutral-400 hover:text-white bg-white/5 rounded-xl transition-colors"
+                        className="p-3 lg:hidden text-neutral-400 hover:text-white bg-white/5 rounded-xl transition-colors cursor-pointer"
                     >
                         <Menu className="w-6 h-6" />
                     </button>
@@ -113,7 +113,7 @@ const AdminLayout = ({ children }) => {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <button className="p-3 text-neutral-400 hover:text-white transition-colors relative">
+                        <button className="p-3 text-neutral-400 hover:text-white transition-colors relative cursor-pointer">
                             <Settings className="w-5 h-5" />
                         </button>
                     </div>

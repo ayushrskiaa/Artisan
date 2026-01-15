@@ -145,7 +145,7 @@ const ManagePaintings = () => {
                                                 <button
                                                     onClick={() => toggleFeatured(painting)}
                                                     disabled={toggling === painting._id}
-                                                    className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit ${painting.isFeatured
+                                                    className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit cursor-pointer ${painting.isFeatured
                                                         ? 'bg-accent/10 border-accent/40 text-accent'
                                                         : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-white/30'
                                                         }`}
@@ -161,7 +161,7 @@ const ManagePaintings = () => {
                                                 <button
                                                     onClick={() => setAsMasterpiece(painting)}
                                                     disabled={painting.isMasterpiece || toggling === ('m-' + painting._id)}
-                                                    className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit ${painting.isMasterpiece
+                                                    className={`flex items-center gap-2 font-bold text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full transition-all border w-fit cursor-pointer ${painting.isMasterpiece
                                                         ? 'bg-white text-black border-white'
                                                         : 'bg-white/5 border-white/10 text-neutral-600 hover:text-white hover:border-accent/40'
                                                         }`}
@@ -186,7 +186,7 @@ const ManagePaintings = () => {
                                                 </Link>
                                                 <button
                                                     onClick={() => deleteHandler(painting._id)}
-                                                    className="p-3 bg-white/5 hover:bg-red-500/20 rounded-xl text-red-400 transition-all"
+                                                    className="p-3 bg-white/5 hover:bg-red-500/20 rounded-xl text-red-400 transition-all cursor-pointer"
                                                     title="Expunge"
                                                 >
                                                     <Trash2 className="w-5 h-5" />

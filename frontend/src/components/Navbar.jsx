@@ -42,7 +42,7 @@ const Navbar = () => {
                             <div className="flex items-center gap-6 border-l border-white/10 pl-8">
                                 <button
                                     onClick={() => setIsCartOpen(true)}
-                                    className="relative p-2 text-neutral-300 hover:text-white transition-colors"
+                                    className="relative p-2 text-neutral-300 hover:text-white transition-colors cursor-pointer"
                                 >
                                     <ShoppingCart className="w-6 h-6" />
                                     {cartItems.length > 0 && (
@@ -56,7 +56,7 @@ const Navbar = () => {
                                     <div className="relative">
                                         <button
                                             onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                                            className="flex items-center gap-2 p-2 rounded-full border border-white/10 hover:border-accent/40 bg-white/5 transition-all text-neutral-300 hover:text-white"
+                                            className="flex items-center gap-2 p-2 rounded-full border border-white/10 hover:border-accent/40 bg-white/5 transition-all text-neutral-300 hover:text-white cursor-pointer"
                                         >
                                             <User className="w-5 h-5" />
                                             <span className="text-sm font-bold tracking-wide">{user.name.split(' ')[0]}</span>
@@ -74,7 +74,7 @@ const Navbar = () => {
                                                 </Link>
                                                 <button
                                                     onClick={handleLogout}
-                                                    className="w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-red-500/20 text-red-400 transition-colors border-t border-white/5"
+                                                    className="w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-red-500/20 text-red-400 transition-colors border-t border-white/5 cursor-pointer"
                                                 >
                                                     <LogOut className="w-4 h-4" /> Logout
                                                 </button>
@@ -93,7 +93,7 @@ const Navbar = () => {
                         <div className="md:hidden flex items-center gap-4">
                             <button
                                 onClick={() => setIsCartOpen(true)}
-                                className="relative p-2 text-neutral-300"
+                                className="relative p-2 text-neutral-300 cursor-pointer"
                             >
                                 <ShoppingCart className="w-6 h-6" />
                                 {cartItems.length > 0 && (
@@ -104,7 +104,7 @@ const Navbar = () => {
                             </button>
                             <button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="text-neutral-300 hover:text-white p-2"
+                                className="text-neutral-300 hover:text-white p-2 cursor-pointer"
                             >
                                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                             </button>
@@ -124,7 +124,7 @@ const Navbar = () => {
                             {user ? (
                                 <>
                                     <Link to="/orders" onClick={() => setIsOpen(false)} className="block py-2 text-neutral-300 hover:text-white border-b border-white/5">My Orders</Link>
-                                    <button onClick={handleLogout} className="block w-full text-left py-2 text-red-400">Logout</button>
+                                    <button onClick={handleLogout} className="block w-full text-left py-2 text-red-400 cursor-pointer">Logout</button>
                                 </>
                             ) : (
                                 <Link to="/login" onClick={() => setIsOpen(false)} className="block py-2 text-accent font-bold">Sign In</Link>

@@ -91,7 +91,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     >
                         <div className="p-6 border-b border-white/10 flex justify-between items-center">
                             <h2 className="text-2xl font-bold title-font">{showAddress ? 'Shipping Details' : 'Your Collection'}</h2>
-                            <button onClick={() => showAddress ? setShowAddress(false) : onClose()} className="p-2 hover:bg-white/5 rounded-full transition-colors">
+                            <button onClick={() => showAddress ? setShowAddress(false) : onClose()} className="p-2 hover:bg-white/5 rounded-full transition-colors cursor-pointer">
                                 <X className="w-6 h-6" />
                             </button>
                         </div>
@@ -117,7 +117,7 @@ const CartModal = ({ isOpen, onClose }) => {
                                                 </div>
                                                 <button
                                                     onClick={() => removeFromCart(item._id)}
-                                                    className="text-neutral-600 hover:text-red-400 p-2 transition-colors self-start"
+                                                    className="text-neutral-600 hover:text-red-400 p-2 transition-colors self-start cursor-pointer"
                                                 >
                                                     <Trash2 className="w-5 h-5" />
                                                 </button>

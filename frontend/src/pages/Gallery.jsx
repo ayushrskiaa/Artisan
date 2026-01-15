@@ -62,7 +62,7 @@ const Gallery = () => {
                         <button
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
-                            className={`whitespace-nowrap px-6 py-4 rounded-full font-bold text-sm transition-all border ${selectedCategory === cat
+                            className={`whitespace-nowrap px-6 py-4 rounded-full font-bold text-sm transition-all border cursor-pointer ${selectedCategory === cat
                                 ? 'bg-accent text-neutral-900 border-accent'
                                 : 'border-white/10 text-neutral-400 hover:border-white/30'
                                 }`}

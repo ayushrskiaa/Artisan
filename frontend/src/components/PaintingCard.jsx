@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingCart, Eye } from 'lucide-react';
+import { ShoppingCart, Eye, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
 const PaintingCard = ({ painting }) => {
-    const { addToCart } = useCart();
+    const { addToCart, isInCart } = useCart();
+    const inCart = isInCart(painting._id);
 
     return (
         <motion.div
@@ -24,12 +25,16 @@ const PaintingCard = ({ painting }) => {
                     <button
                         onClick={(e) => {
                             e.preventDefault();
-                            addToCart(painting);
+                            if (!inCart) addToCart(painting);
                         }}
-                        className="p-3 bg-white text-neutral-900 rounded-full hover:bg-accent transition-colors shadow-xl"
-                        title="Add to Cart"
+                        disabled={inCart}
+                        className={`p-3 rounded-full transition-colors shadow-xl ${inCart
+                                ? 'bg-neutral-600 text-neutral-400 cursor-not-allowed'
+                                : 'bg-white text-neutral-900 hover:bg-accent'
+                            }`}
+                        title={inCart ? "Already in Cart" : "Add to Cart"}
                     >
-                        <ShoppingCart className="w-5 h-5" />
+                        {inCart ? <Check className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
                     </button>
                     <Link
                         to={`/painting/${painting._id}`}

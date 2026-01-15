@@ -94,7 +94,7 @@ const ManageOrders = () => {
                                                     ) : (
                                                         <button
                                                             onClick={() => payHandler(order._id)}
-                                                            className="flex items-center gap-1.5 text-yellow-500 hover:text-green-500 transition-colors font-bold text-[9px] uppercase tracking-widest bg-yellow-500/10 px-2 py-0.5 rounded-full border border-yellow-500/20"
+                                                            className="flex items-center gap-1.5 text-yellow-500 hover:text-green-500 transition-colors font-bold text-[9px] uppercase tracking-widest bg-yellow-500/10 px-2 py-0.5 rounded-full border border-yellow-500/20 cursor-pointer"
                                                         >
                                                             <Clock className="w-2.5 h-2.5" /> Pending
                                                         </button>
@@ -120,12 +120,12 @@ const ManageOrders = () => {
                                                 {!order.isDelivered && (
                                                     <button
                                                         onClick={() => deliverHandler(order._id)}
-                                                        className="relative bg-white text-black font-bold text-[10px] uppercase tracking-[0.2em] px-6 py-3 rounded-full hover:bg-accent hover:text-black transition-all shadow-lg active:scale-95"
+                                                        className="relative bg-white text-black font-bold text-[10px] uppercase tracking-[0.2em] px-6 py-3 rounded-full hover:bg-accent hover:text-black transition-all shadow-lg active:scale-95 cursor-pointer"
                                                     >
                                                         Dispatch Art
                                                     </button>
                                                 )}
-                                                <button className="p-3 text-neutral-600 hover:text-white transition-colors" title="Detailed View">
+                                                <button className="p-3 text-neutral-600 hover:text-white transition-colors cursor-pointer" title="Detailed View">
                                                     <ExternalLink className="w-4 h-4" />
                                                 </button>
                                             </div>
