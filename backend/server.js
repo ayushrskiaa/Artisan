@@ -6,6 +6,7 @@ const paintingRoutes = require('./routes/paintingRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const razorpayRoutes = require('./routes/razorpayRoutes');
 
 connectDB();
 
@@ -35,6 +36,7 @@ app.use('/api/paintings', paintingRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/razorpay', razorpayRoutes);
 
 const PORT = process.env.PORT || 5000;
 

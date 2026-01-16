@@ -63,20 +63,84 @@ const CartModal = ({ isOpen, onClose }) => {
 
             console.log('Order Data:', orderData);
 
-            // Create Order in Backend
-            const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
-
             if (paymentMethod === 'COD') {
+                // Create Order in Backend for COD
+                const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
                 alert('Order placed successfully! You will pay on delivery.');
                 clearCart();
                 onClose();
                 navigate('/success');
-            } else {
-                // Stripe Payment - redirect to success for now
-                alert('Order placed successfully! Redirecting to payment...');
-                clearCart();
-                onClose();
-                navigate('/success');
+            } else if (paymentMethod === 'Razorpay') {
+                // Razorpay Payment
+                // First create Razorpay order
+                const { data: razorpayOrder } = await axios.post(
+                    `${import.meta.env.VITE_API_URL}/razorpay/create-order`,
+                    { amount: cartTotal, receipt: `order_${Date.now()}` },
+                    config
+                );
+
+                // Initialize Razorpay checkout
+                const options = {
+                    key: razorpayOrder.key_id,
+                    amount: razorpayOrder.amount,
+                    currency: razorpayOrder.currency,
+                    name: 'Artisan Gallery',
+                    description: 'Purchase Artwork',
+                    order_id: razorpayOrder.order_id,
+                    handler: async function (response) {
+                        try {
+                            // Verify payment
+                            const verifyResponse = await axios.post(
+                                `${import.meta.env.VITE_API_URL}/razorpay/verify-payment`,
+                                {
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_signature: response.razorpay_signature
+                                },
+                                config
+                            );
+
+                            if (verifyResponse.data.success) {
+                                // Create order in backend after successful payment
+                                const orderDataWithPayment = {
+                                    ...orderData,
+                                    paymentResult: {
+                                        id: response.razorpay_payment_id,
+                                        status: 'paid',
+                                        update_time: new Date().toISOString()
+                                    },
+                                    isPaid: true,
+                                    paidAt: new Date()
+                                };
+
+                                await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderDataWithPayment, config);
+
+                                alert('Payment successful! Order placed.');
+                                clearCart();
+                                onClose();
+                                navigate('/success');
+                            }
+                        } catch (error) {
+                            console.error('Payment verification error:', error);
+                            alert('Payment verification failed. Please contact support.');
+                        }
+                    },
+                    prefill: {
+                        name: user.name,
+                        email: user.email
+                    },
+                    theme: {
+                        color: '#d4af37'
+                    }
+                };
+
+                const rzp = new window.Razorpay(options);
+                rzp.on('payment.failed', function (response) {
+                    alert('Payment failed! Please try again.');
+                    console.error('Payment failed:', response.error);
+                });
+                rzp.open();
+                setLoading(false);
             }
 
         } catch (error) {
@@ -190,14 +254,14 @@ const CartModal = ({ isOpen, onClose }) => {
                                         <div className="grid grid-cols-2 gap-3">
                                             <button
                                                 type="button"
-                                                onClick={() => setPaymentMethod('Stripe')}
-                                                className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all cursor-pointer ${paymentMethod === 'Stripe'
+                                                onClick={() => setPaymentMethod('Razorpay')}
+                                                className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all cursor-pointer ${paymentMethod === 'Razorpay'
                                                     ? 'border-accent bg-accent/10 text-accent'
                                                     : 'border-white/10 bg-white/5 text-neutral-400 hover:border-white/30'
                                                     }`}
                                             >
                                                 <CreditCard className="w-6 h-6" />
-                                                <span className="text-xs font-bold">Card Payment</span>
+                                                <span className="text-xs font-bold">Razorpay</span>
                                             </button>
                                             <button
                                                 type="button"

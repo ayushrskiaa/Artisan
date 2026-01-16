@@ -9,6 +9,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+import RefundPolicy from './pages/RefundPolicy';
+import ShippingPolicy from './pages/ShippingPolicy';
+import ContactUs from './pages/ContactUs';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { CartProvider } from './context/CartContext';
@@ -32,6 +37,13 @@ function App() {
                 {/* User Routes */}
                 <Route path="/orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
                 <Route path="/success" element={<ProtectedRoute><Success /></ProtectedRoute>} />
+
+                {/* Policy Pages */}
+                <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/terms" element={<TermsConditions />} />
+                <Route path="/refund-policy" element={<RefundPolicy />} />
+                <Route path="/shipping-policy" element={<ShippingPolicy />} />
+                <Route path="/contact" element={<ContactUs />} />
 
                 <Route path="/cancel" element={<div className="pt-40 text-center min-h-screen">Payment Cancelled. <Link to="/gallery" className="text-accent underline">Return to Gallery</Link></div>} />
 
