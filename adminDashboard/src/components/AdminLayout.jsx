@@ -86,7 +86,8 @@ const AdminLayout = ({ children }) => {
                             </div>
                         </div>
 
-                        <a href="http://localhost:5173" className="flex items-center gap-3 px-6 py-3 text-sm text-neutral-400 hover:text-white transition-colors">
+
+                        <a href={import.meta.env.VITE_STORE_URL} className="flex items-center gap-3 px-6 py-3 text-sm text-neutral-400 hover:text-white transition-colors">
                             <ArrowLeft className="w-4 h-4" /> Exit to Store
                         </a>
 

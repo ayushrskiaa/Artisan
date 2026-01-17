@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }) => {
             <div>
                 <h1 className="text-4xl font-bold mb-4">Access Denied</h1>
                 <p className="text-neutral-500">This area is reserved for authorized sellers only.</p>
-                <a href="http://localhost:5173" className="text-accent mt-4 block underline">Return to Shop</a>
+                <a href={import.meta.env.VITE_STORE_URL} className="text-accent mt-4 block underline">Return to Shop</a>
             </div>
         </div>;
     }

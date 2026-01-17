@@ -39,7 +39,7 @@ const Navbar = () => {
                             <Link to="/" className="text-neutral-300 hover:text-white transition-colors font-medium">Home</Link>
                             <Link to="/gallery" className="text-neutral-300 hover:text-white transition-colors font-medium">Gallery</Link>
                             {user?.isAdmin && (
-                                <a href="http://localhost:5174" className="text-accent hover:text-white transition-colors font-bold flex items-center gap-2">
+                                <a href={import.meta.env.VITE_ADMIN_URL} className="text-accent hover:text-white transition-colors font-bold flex items-center gap-2">
                                     <LayoutDashboard className="w-4 h-4" /> Dashboard
                                 </a>
                             )}
@@ -70,7 +70,7 @@ const Navbar = () => {
                                         {isUserMenuOpen && (
                                             <div className="absolute right-0 mt-3 w-48 glass rounded-xl border border-white/10 overflow-hidden shadow-2xl animate-in fade-in slide-in-from-top-2 duration-200">
                                                 {user.isAdmin && (
-                                                    <a href="http://localhost:5174" className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent/20 text-accent transition-colors">
+                                                    <a href={import.meta.env.VITE_ADMIN_URL} className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-accent/20 text-accent transition-colors">
                                                         <LayoutDashboard className="w-4 h-4" /> Seller Dash
                                                     </a>
                                                 )}
@@ -124,7 +124,7 @@ const Navbar = () => {
                             <Link to="/" onClick={() => setIsOpen(false)} className="block py-2 text-neutral-300 hover:text-white border-b border-white/5">Home</Link>
                             <Link to="/gallery" onClick={() => setIsOpen(false)} className="block py-2 text-neutral-300 hover:text-white border-b border-white/5">Gallery</Link>
                             {user?.isAdmin && (
-                                <a href="http://localhost:5174" className="block py-2 text-accent font-bold border-b border-white/5">Seller Dashboard</a>
+                                <a href={import.meta.env.VITE_ADMIN_URL} className="block py-2 text-accent font-bold border-b border-white/5">Seller Dashboard</a>
                             )}
                             {user ? (
                                 <>

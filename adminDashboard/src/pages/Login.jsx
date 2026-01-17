@@ -61,7 +61,7 @@ const Login = () => {
                 </form>
 
                 <div className="mt-10 pt-10 border-t border-white/5 text-center">
-                    <a href="http://localhost:5173" className="text-neutral-500 hover:text-white transition-colors text-sm underline decoration-1 underline-offset-4">
+                    <a href={import.meta.env.VITE_STORE_URL} className="text-neutral-500 hover:text-white transition-colors text-sm underline decoration-1 underline-offset-4">
                         Return to Public Shop
                     </a>
                 </div>
