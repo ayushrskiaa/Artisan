@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import ManagePaintings from './pages/ManagePaintings';
 import EditPainting from './pages/EditPainting';
 import ManageOrders from './pages/ManageOrders';
+import ManageCoupons from './pages/ManageCoupons';
 import Login from './pages/Login';
 
 function App() {
@@ -56,6 +57,14 @@ function App() {
                         <ProtectedRoute>
                             <AdminLayout>
                                 <ManageOrders />
+                            </AdminLayout>
+                        </ProtectedRoute>
+                    } />
+
+                    <Route path="/coupons" element={
+                        <ProtectedRoute>
+                            <AdminLayout>
+                                <ManageCoupons />
                             </AdminLayout>
                         </ProtectedRoute>
                     } />

@@ -14,10 +14,65 @@ const CartModal = ({ isOpen, onClose }) => {
     const [showAddress, setShowAddress] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('');
 
+    // Coupon state
+    const [couponCode, setCouponCode] = useState('');
+    const [appliedCoupon, setAppliedCoupon] = useState(null);
+    const [couponError, setCouponError] = useState('');
+    const [couponLoading, setCouponLoading] = useState(false);
+
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [country, setCountry] = useState('');
+
+    // Apply coupon function
+    const applyCoupon = async () => {
+        if (!couponCode.trim()) {
+            setCouponError('Please enter a coupon code');
+            return;
+        }
+
+        setCouponLoading(true);
+        setCouponError('');
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`
+                }
+            };
+
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}/coupons/validate`,
+                {
+                    code: couponCode,
+                    cartTotal: cartTotal
+                },
+                config
+            );
+
+            if (data.success) {
+                setAppliedCoupon(data.coupon);
+                setCouponError('');
+            }
+        } catch (error) {
+            setCouponError(error.response?.data?.message || 'Invalid coupon code');
+            setAppliedCoupon(null);
+        } finally {
+            setCouponLoading(false);
+        }
+    };
+
+    // Remove coupon
+    const removeCoupon = () => {
+        setAppliedCoupon(null);
+        setCouponCode('');
+        setCouponError('');
+    };
+
+    // Calculate final price
+    const finalPrice = appliedCoupon ? appliedCoupon.finalAmount : cartTotal;
 
     const handleCheckoutClick = () => {
         if (!user) {
@@ -58,7 +113,11 @@ const CartModal = ({ isOpen, onClose }) => {
                 })),
                 shippingAddress: { address, city, postalCode, country },
                 paymentMethod: paymentMethod,
-                totalPrice: cartTotal
+                totalPrice: finalPrice,
+                appliedCoupon: appliedCoupon ? {
+                    code: appliedCoupon.code,
+                    discountAmount: appliedCoupon.discountAmount
+                } : { code: '', discountAmount: 0 }
             };
 
             console.log('Order Data:', orderData);
@@ -66,6 +125,12 @@ const CartModal = ({ isOpen, onClose }) => {
             if (paymentMethod === 'COD') {
                 // Create Order in Backend for COD
                 const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
+
+                // Increment coupon usage if applied
+                if (appliedCoupon) {
+                    await axios.post(`${import.meta.env.VITE_API_URL}/coupons/use/${appliedCoupon.code}`, {}, config);
+                }
+
                 clearCart();
                 onClose();
                 navigate('/success');
@@ -74,7 +139,7 @@ const CartModal = ({ isOpen, onClose }) => {
                 // First create Razorpay order
                 const { data: razorpayOrder } = await axios.post(
                     `${import.meta.env.VITE_API_URL}/razorpay/create-order`,
-                    { amount: cartTotal, receipt: `order_${Date.now()}` },
+                    { amount: finalPrice, receipt: `order_${Date.now()}` },
                     config
                 );
 
@@ -113,6 +178,11 @@ const CartModal = ({ isOpen, onClose }) => {
                                 };
 
                                 await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderDataWithPayment, config);
+
+                                // Increment coupon usage if applied
+                                if (appliedCoupon) {
+                                    await axios.post(`${import.meta.env.VITE_API_URL}/coupons/use/${appliedCoupon.code}`, {}, config);
+                                }
 
                                 clearCart();
                                 onClose();
@@ -278,11 +348,74 @@ const CartModal = ({ isOpen, onClose }) => {
                             )}
                         </div>
 
+                        {cartItems.length > 0 && !showAddress && (
+                            <div className="px-6 pb-4">
+                                <div className="glass rounded-xl p-4">
+                                    <h3 className="font-bold mb-3 text-sm">Have a Coupon Code?</h3>
+                                    <div className="flex gap-2">
+                                        <input
+                                            type="text"
+                                            value={couponCode}
+                                            onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                                            placeholder="Enter coupon code"
+                                            className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:border-accent text-sm"
+                                            disabled={couponLoading || appliedCoupon}
+                                        />
+                                        {!appliedCoupon ? (
+                                            <button
+                                                onClick={applyCoupon}
+                                                disabled={couponLoading || !user}
+                                                className="bg-accent text-black px-6 py-2 rounded-lg font-bold hover:bg-accent/90 disabled:opacity-50 text-sm cursor-pointer"
+                                            >
+                                                {couponLoading ? 'Applying...' : 'Apply'}
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={removeCoupon}
+                                                className="bg-red-500/20 text-red-500 px-6 py-2 rounded-lg font-bold hover:bg-red-500/30 text-sm cursor-pointer border border-red-500/30"
+                                            >
+                                                Remove
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {couponError && (
+                                        <p className="text-red-500 text-xs mt-2">{couponError}</p>
+                                    )}
+
+                                    {appliedCoupon && (
+                                        <div className="mt-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <p className="text-green-500 font-bold text-sm">✓ Coupon Applied!</p>
+                                                    <p className="text-xs text-neutral-400 mt-1">
+                                                        {appliedCoupon.code} - Save ₹{appliedCoupon.discountAmount.toLocaleString()}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+
                         {cartItems.length > 0 && (
                             <div className="p-6 border-t border-white/10 space-y-4 bg-zinc-950/50 backdrop-blur-xl">
+                                {appliedCoupon && (
+                                    <div className="flex justify-between items-center text-sm text-neutral-400">
+                                        <span>Subtotal:</span>
+                                        <span>₹{cartTotal.toLocaleString()}</span>
+                                    </div>
+                                )}
+                                {appliedCoupon && (
+                                    <div className="flex justify-between items-center text-sm text-green-500">
+                                        <span>Discount ({appliedCoupon.code}):</span>
+                                        <span>-₹{appliedCoupon.discountAmount.toLocaleString()}</span>
+                                    </div>
+                                )}
                                 <div className="flex justify-between items-center">
                                     <span className="text-neutral-400 uppercase text-xs tracking-[0.2em]">Total Amount</span>
-                                    <span className="text-2xl font-bold">₹{cartTotal.toLocaleString()}</span>
+                                    <span className="text-2xl font-bold text-accent">₹{finalPrice.toLocaleString()}</span>
                                 </div>
 
                                 {!showAddress ? (

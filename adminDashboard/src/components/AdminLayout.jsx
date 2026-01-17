@@ -4,6 +4,7 @@ import {
     LayoutDashboard,
     Palette,
     ShoppingBag,
+    Ticket,
     LogOut,
     Menu,
     X,
@@ -28,6 +29,7 @@ const AdminLayout = ({ children }) => {
         { path: '/', icon: LayoutDashboard, label: 'Overview' },
         { path: '/paintings', icon: Palette, label: 'Inventory' },
         { path: '/orders', icon: ShoppingBag, label: 'Orders' },
+        { path: '/coupons', icon: Ticket, label: 'Coupons' },
     ];
 
     const isActive = (path) => location.pathname === path;
@@ -44,7 +46,7 @@ const AdminLayout = ({ children }) => {
             <aside className={`
                 fixed inset-y-0 left-0 z-[101] w-72 bg-[#0a0a0a] border-r border-white/5 transform transition-transform duration-300 ease-in-out lg:relative lg:translate-x-0
                 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            `}>
+`}>
                 <div className="flex flex-col h-full">
                     <div className="p-8 flex items-center gap-3">
                         <div className="p-2 bg-accent rounded-xl">
@@ -63,8 +65,9 @@ const AdminLayout = ({ children }) => {
                                     flex items-center gap-3 px-6 py-4 rounded-2xl transition-all duration-200 group
                                     ${isActive(item.path)
                                         ? 'bg-accent text-black font-bold shadow-[0_0_20px_rgba(192,160,128,0.3)]'
-                                        : 'text-neutral-500 hover:bg-white/5 hover:text-white'}
-                                `}
+                                        : 'text-neutral-500 hover:bg-white/5 hover:text-white'
+                                    }
+`}
                             >
                                 <item.icon className={`w-5 h-5 ${isActive(item.path) ? 'text-black' : 'group-hover:scale-110 transition-transform'}`} />
                                 <span className="tracking-wide text-sm">{item.label}</span>
