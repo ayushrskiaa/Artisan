@@ -72,7 +72,7 @@ const OrderHistory = () => {
                                     <p className="font-bold text-accent">₹{order.totalPrice.toLocaleString()}</p>
                                 </div>
                                 <div className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/5">
-                                    {order.isPaid ? (
+                                    {order.isPaid || order.paymentMethod === 'Razorpay' ? (
                                         <><CheckCircle className="w-4 h-4 text-green-500" /> <span className="text-xs font-bold uppercase">Paid</span></>
                                     ) : (
                                         <><Clock className="w-4 h-4 text-yellow-500" /> <span className="text-xs font-bold uppercase">Pending</span></>
