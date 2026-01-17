@@ -150,8 +150,8 @@ const TermsConditions = () => {
                             <p className="mb-3">For questions about these Terms & Conditions, please contact us:</p>
                             <div className="glass p-4 rounded-xl">
                                 <p className="font-bold text-accent">RSKIAA Gallery</p>
-                                <p>Email: support@rskiaagallery.com</p>
-                                <p>Phone: +91 1234567890</p>
+                                <p>Email: ashutoshrskiaa@gmail.com</p>
+                                <p>Phone: +91 9507515702</p>
                             </div>
                         </section>
                     </div>

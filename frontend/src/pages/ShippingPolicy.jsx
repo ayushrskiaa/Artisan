@@ -144,7 +144,7 @@ const ShippingPolicy = () => {
                             <ol className="list-decimal list-inside space-y-2 ml-4">
                                 <li>Do not accept the delivery if the package appears severely damaged</li>
                                 <li>If you've already accepted, take photos of the damage immediately</li>
-                                <li>Contact us within 48 hours at support@rskiaagallery.com</li>
+                                <li>Contact us within 48 hours at ashutoshrskiaa@gmail.com</li>
                                 <li>We will arrange for a replacement or full refund</li>
                             </ol>
                         </section>
@@ -174,8 +174,8 @@ const ShippingPolicy = () => {
                             <p className="mb-3">For shipping-related queries:</p>
                             <div className="glass p-4 rounded-xl">
                                 <p className="font-bold text-accent">RSKIAA Gallery</p>
-                                <p>Email: shipping@rskiaagallery.com</p>
-                                <p>Phone: +91 1234567890</p>
+                                <p>Email: ashutoshrskiaa@gmail.com</p>
+                                <p>Phone: +91 9507515702</p>
                                 <p>Hours: Monday - Saturday, 10:00 AM - 6:00 PM IST</p>
                             </div>
                         </section>

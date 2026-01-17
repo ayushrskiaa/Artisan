@@ -61,13 +61,13 @@ const Hero = ({ masterpiece }) => {
                                             }`}
                                     >
                                         <ShoppingBag className="w-5 h-5" />
-                                        {isInCart ? 'In Your Collection' : 'Add to Collection'}
+                                        {isInCart ? 'In Your Collection' : 'Buy Now'}
                                     </button>
                                     <Link
                                         to={`/painting/${masterpiece._id}`}
                                         className="border border-white/20 hover:border-white/40 px-8 py-4 rounded-full font-bold transition-all hover:bg-white/5"
                                     >
-                                        Examine Details
+                                        Details
                                     </Link>
                                 </>
                             )}

@@ -147,8 +147,8 @@ const ContactUs = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Email Us</h3>
                                         <p className="text-neutral-400 text-sm mb-2">For general inquiries and support</p>
-                                        <a href="mailto:support@rskiaagallery.com" className="text-accent hover:text-accent/80 transition-colors">
-                                            support@rskiaagallery.com
+                                        <a href="mailto:ashutoshrskiaa@gmail.com" className="text-accent hover:text-accent/80 transition-colors">
+                                            ashutoshrskiaa@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -160,8 +160,8 @@ const ContactUs = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Call Us</h3>
                                         <p className="text-neutral-400 text-sm mb-2">Monday - Saturday, 10 AM - 6 PM IST</p>
-                                        <a href="tel:+911234567890" className="text-accent hover:text-accent/80 transition-colors">
-                                            +91 1234567890
+                                        <a href="tel:+919507515702" className="text-accent hover:text-accent/80 transition-colors">
+                                            +91 9507515702
                                         </a>
                                     </div>
                                 </div>
