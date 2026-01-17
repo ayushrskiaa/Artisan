@@ -16,21 +16,24 @@ const PaintingCard = ({ painting }) => {
             className="group artistic-reveal"
         >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden mb-4 border border-white/5 shadow-2xl art-card paint-splatter ink-blot watercolor-bg">
-                <img
-                    src={painting.imageUrl}
-                    alt={painting.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                <Link to={`/painting/${painting._id}`} className="block w-full h-full">
+                    <img
+                        src={painting.imageUrl}
+                        alt={painting.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                </Link>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 pointer-events-none">
                     <button
                         onClick={(e) => {
                             e.preventDefault();
+                            e.stopPropagation();
                             if (!inCart) addToCart(painting);
                         }}
                         disabled={inCart}
-                        className={`p-4 rounded-full transition-all shadow-2xl transform hover:scale-110 ${inCart
-                                ? 'bg-neutral-600 text-neutral-400 cursor-not-allowed'
-                                : 'bg-white text-neutral-900 hover:bg-accent hover:shadow-accent/50'
+                        className={`p-4 rounded-full transition-all shadow-2xl transform hover:scale-110 pointer-events-auto ${inCart
+                            ? 'bg-neutral-600 text-neutral-400 cursor-not-allowed'
+                            : 'bg-white text-neutral-900 hover:bg-accent hover:shadow-accent/50'
                             }`}
                         title={inCart ? "Already in Cart" : "Add to Cart"}
                     >
@@ -38,18 +41,18 @@ const PaintingCard = ({ painting }) => {
                     </button>
                     <Link
                         to={`/painting/${painting._id}`}
-                        className="p-4 bg-white text-neutral-900 rounded-full hover:bg-accent transition-all shadow-2xl transform hover:scale-110 hover:shadow-accent/50"
+                        className="p-4 bg-white text-neutral-900 rounded-full hover:bg-accent transition-all shadow-2xl transform hover:scale-110 hover:shadow-accent/50 pointer-events-auto"
                         title="View Details"
                     >
                         <Eye className="w-5 h-5" />
                     </Link>
                 </div>
                 {painting.discount > 0 && (
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-black px-4 py-2 rounded-full shadow-2xl uppercase tracking-widest animate-pulse glow-accent">
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-[10px] font-black px-4 py-2 rounded-full shadow-2xl uppercase tracking-widest animate-pulse glow-accent pointer-events-none">
                         Offer -{painting.discount}%
                     </div>
                 )}
-                <div className="absolute top-4 right-4 glass text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl flex flex-col items-end backdrop-blur-xl">
+                <div className="absolute top-4 right-4 glass text-white text-xs font-bold px-4 py-2 rounded-full shadow-2xl flex flex-col items-end backdrop-blur-xl pointer-events-none">
                     {painting.discount > 0 ? (
                         <>
                             <span className="line-through opacity-50 text-[10px] leading-none mb-1">₹{painting.price.toLocaleString()}</span>
