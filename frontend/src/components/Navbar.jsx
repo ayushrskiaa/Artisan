@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ShoppingCart, Menu, X, Palette, User, LogOut, Package, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, Menu, X, User, LogOut, Package, LayoutDashboard } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import CartModal from './CartModal';
+import logo from '../assets/logo.jpeg';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,8 +25,12 @@ const Navbar = () => {
             <nav className="fixed w-full z-50 glass border-b border-white/10 top-0">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-20 items-center">
-                        <Link to="/" className="flex items-center space-x-2 group">
-                            <Palette className="w-8 h-8 text-accent group-hover:rotate-12 transition-transform" />
+                        <Link to="/" className="flex items-center space-x-3 group">
+                            <img
+                                src={logo}
+                                alt="Rskiaa Logo"
+                                className="w-12 h-12 rounded-full object-cover  group-hover:border-accent transition-all group-hover:scale-110"
+                            />
                             <span className="text-3xl title-font font-bold tracking-wider">Rskiaa</span>
                         </Link>
 
