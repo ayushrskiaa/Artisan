@@ -58,18 +58,6 @@ router.get('/myorders', protect, async (req, res) => {
     res.json(orders);
 });
 
-// @desc    Get order by ID
-// @route   GET /api/orders/:id
-router.get('/:id', protect, async (req, res) => {
-    const order = await Order.findById(req.params.id).populate('user', 'name email');
-
-    if (order) {
-        res.json(order);
-    } else {
-        res.status(404).json({ message: 'Order not found' });
-    }
-});
-
 // @desc    Update order to paid
 // @route   PUT /api/orders/:id/pay
 router.put('/:id/pay', protect, admin, async (req, res) => {
@@ -103,6 +91,47 @@ router.put('/:id/deliver', protect, admin, async (req, res) => {
 
         const updatedOrder = await order.save();
         res.json(updatedOrder);
+    } else {
+        res.status(404).json({ message: 'Order not found' });
+    }
+});
+
+// @desc    Update order tracking information
+// @route   PUT /api/orders/:id/tracking
+router.put('/:id/tracking', protect, admin, async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+
+        if (order) {
+            const { deliveryPartner, trackingId, deliveryStatus } = req.body;
+            
+            if (deliveryPartner !== undefined) order.deliveryPartner = deliveryPartner;
+            if (trackingId !== undefined) order.trackingId = trackingId;
+            if (deliveryStatus !== undefined) order.deliveryStatus = deliveryStatus;
+            
+            // Auto-mark as delivered if status is "Delivered"
+            if (deliveryStatus === 'Delivered' && !order.isDelivered) {
+                order.isDelivered = true;
+                order.deliveredAt = Date.now();
+            }
+
+            const updatedOrder = await order.save();
+            res.json(updatedOrder);
+        } else {
+            res.status(404).json({ message: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// @desc    Get order by ID
+// @route   GET /api/orders/:id
+router.get('/:id', protect, async (req, res) => {
+    const order = await Order.findById(req.params.id).populate('user', 'name email');
+
+    if (order) {
+        res.json(order);
     } else {
         res.status(404).json({ message: 'Order not found' });
     }

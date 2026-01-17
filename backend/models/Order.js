@@ -56,6 +56,19 @@ const orderSchema = mongoose.Schema({
     },
     deliveredAt: {
         type: Date
+    },
+    deliveryPartner: {
+        type: String,
+        default: ''
+    },
+    trackingId: {
+        type: String,
+        default: ''
+    },
+    deliveryStatus: {
+        type: String,
+        enum: ['Order Placed', 'Processing', 'Packed', 'Shipped', 'Out for Delivery', 'Delivered', 'Cancelled'],
+        default: 'Order Placed'
     }
 }, {
     timestamps: true
