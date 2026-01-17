@@ -52,7 +52,7 @@ const Home = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/5 blur-[120px] rounded-full" />
                 <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                     <h2 className="text-4xl md:text-6xl font-bold title-font mb-8">Elevate Your Living Space With Authentic Art</h2>
-                    <p className="text-xl text-neutral-400 mb-12">Join 10,000+ art lovers who have found their perfect piece at Artisan Gallery.</p>
+                    <p className="text-xl text-neutral-400 mb-12">Join 10,000+ art lovers who have found their perfect piece at RSKIAA Gallery.</p>
                     <Link to="/gallery" className="bg-white text-neutral-900 px-10 py-4 rounded-full font-bold hover:bg-accent transition-colors inline-block">
                         Start Your Collection
                     </Link>

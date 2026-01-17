@@ -34,7 +34,7 @@ const RefundPolicy = () => {
                                 <h3 className="text-lg font-bold text-accent">1.1 Before Shipment</h3>
                                 <p>
                                     You can cancel your order before it has been shipped. To cancel an order, please contact us
-                                    immediately at support@artisangallery.com or call +91 1234567890. Once cancelled, a full refund
+                                    immediately at support@rskiaagallery.com or call +91 1234567890. Once cancelled, a full refund
                                     will be processed within 5-7 business days.
                                 </p>
 
@@ -74,7 +74,7 @@ const RefundPolicy = () => {
                                 <h3 className="text-lg font-bold text-accent mt-4">2.3 Return Process</h3>
                                 <p className="mb-3">To initiate a return:</p>
                                 <ol className="list-decimal list-inside space-y-2 ml-4">
-                                    <li>Contact us at support@artisangallery.com with your order number and reason for return</li>
+                                    <li>Contact us at support@rskiaagallery.com with your order number and reason for return</li>
                                     <li>Send clear photos of the damaged/defective item</li>
                                     <li>Wait for our return authorization and instructions</li>
                                     <li>Pack the item securely in its original packaging</li>
@@ -145,7 +145,7 @@ const RefundPolicy = () => {
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">7. Refund Status</h2>
                             <p>
-                                You can check your refund status by contacting us at support@artisangallery.com with your order number.
+                                You can check your refund status by contacting us at support@rskiaagallery.com with your order number.
                                 Please note that it may take additional time for your bank or payment provider to process the refund.
                             </p>
                         </section>
@@ -154,8 +154,8 @@ const RefundPolicy = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">8. Contact Us</h2>
                             <p className="mb-3">For any questions about cancellations, returns, or refunds:</p>
                             <div className="glass p-4 rounded-xl">
-                                <p className="font-bold text-accent">Artisan Gallery</p>
-                                <p>Email: support@artisangallery.com</p>
+                                <p className="font-bold text-accent">RSKIAA Gallery</p>
+                                <p>Email: support@rskiaagallery.com</p>
                                 <p>Phone: +91 1234567890</p>
                                 <p>Hours: Monday - Saturday, 10:00 AM - 6:00 PM IST</p>
                             </div>

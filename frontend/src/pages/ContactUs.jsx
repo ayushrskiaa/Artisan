@@ -147,8 +147,8 @@ const ContactUs = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Email Us</h3>
                                         <p className="text-neutral-400 text-sm mb-2">For general inquiries and support</p>
-                                        <a href="mailto:support@artisangallery.com" className="text-accent hover:text-accent/80 transition-colors">
-                                            support@artisangallery.com
+                                        <a href="mailto:support@rskiaagallery.com" className="text-accent hover:text-accent/80 transition-colors">
+                                            support@rskiaagallery.com
                                         </a>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@ const ContactUs = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Visit Us</h3>
                                         <p className="text-neutral-400 text-sm">
-                                            Artisan Gallery<br />
+                                            RSKIAA Gallery<br />
                                             123 Art Street, Creative District<br />
                                             Mumbai, Maharashtra 400001<br />
                                             India

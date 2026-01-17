@@ -31,7 +31,7 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
                             <p>
-                                By accessing and using Artisan Gallery website, you accept and agree to be bound by the terms and
+                                By accessing and using RSKIAA Gallery website, you accept and agree to be bound by the terms and
                                 provisions of this agreement. If you do not agree to these terms, please do not use our services.
                             </p>
                         </section>
@@ -104,7 +104,7 @@ const TermsConditions = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">8. Intellectual Property</h2>
                             <p>
                                 All content on this website, including text, graphics, logos, images, and artwork, is the property
-                                of Artisan Gallery or its content suppliers and is protected by copyright laws. You may not reproduce,
+                                of RSKIAA Gallery or its content suppliers and is protected by copyright laws. You may not reproduce,
                                 distribute, or create derivative works without our express written permission.
                             </p>
                         </section>
@@ -124,7 +124,7 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">10. Limitation of Liability</h2>
                             <p>
-                                To the fullest extent permitted by law, Artisan Gallery shall not be liable for any indirect,
+                                To the fullest extent permitted by law, RSKIAA Gallery shall not be liable for any indirect,
                                 incidental, special, consequential, or punitive damages arising out of your use of our website or services.
                             </p>
                         </section>
@@ -149,8 +149,8 @@ const TermsConditions = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">13. Contact Information</h2>
                             <p className="mb-3">For questions about these Terms & Conditions, please contact us:</p>
                             <div className="glass p-4 rounded-xl">
-                                <p className="font-bold text-accent">Artisan Gallery</p>
-                                <p>Email: support@artisangallery.com</p>
+                                <p className="font-bold text-accent">RSKIAA Gallery</p>
+                                <p>Email: support@rskiaagallery.com</p>
                                 <p>Phone: +91 1234567890</p>
                             </div>
                         </section>

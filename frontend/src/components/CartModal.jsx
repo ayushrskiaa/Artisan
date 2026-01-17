@@ -66,7 +66,6 @@ const CartModal = ({ isOpen, onClose }) => {
             if (paymentMethod === 'COD') {
                 // Create Order in Backend for COD
                 const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderData, config);
-                alert('Order placed successfully! You will pay on delivery.');
                 clearCart();
                 onClose();
                 navigate('/success');
@@ -84,7 +83,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     key: razorpayOrder.key_id,
                     amount: razorpayOrder.amount,
                     currency: razorpayOrder.currency,
-                    name: 'Artisan Gallery',
+                    name: 'RSKIAA Gallery',
                     description: 'Purchase Artwork',
                     order_id: razorpayOrder.order_id,
                     handler: async function (response) {
