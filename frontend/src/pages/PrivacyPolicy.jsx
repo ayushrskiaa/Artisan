@@ -122,7 +122,7 @@ const PrivacyPolicy = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">10. Contact Us</h2>
                             <p className="mb-3">If you have any questions about this Privacy Policy, please contact us at:</p>
                             <div className="glass p-4 rounded-xl">
-                                <p className="font-bold text-accent">RSKIAA Gallery</p>
+                                <p className="font-bold text-accent">Rskiaa Gallery</p>
                                 <p>Email: ashutoshrskiaa@gmail.com</p>
                                 <p>Phone: +91 9507515702</p>
                             </div>

@@ -83,7 +83,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     key: razorpayOrder.key_id,
                     amount: razorpayOrder.amount,
                     currency: razorpayOrder.currency,
-                    name: 'RSKIAA Gallery',
+                    name: 'Rskiaa Gallery',
                     description: 'Purchase Artwork',
                     order_id: razorpayOrder.order_id,
                     handler: async function (response) {

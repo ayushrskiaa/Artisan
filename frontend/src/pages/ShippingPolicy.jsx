@@ -173,7 +173,7 @@ const ShippingPolicy = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">11. Contact Us</h2>
                             <p className="mb-3">For shipping-related queries:</p>
                             <div className="glass p-4 rounded-xl">
-                                <p className="font-bold text-accent">RSKIAA Gallery</p>
+                                <p className="font-bold text-accent">Rskiaa Gallery</p>
                                 <p>Email: ashutoshrskiaa@gmail.com</p>
                                 <p>Phone: +91 9507515702</p>
                                 <p>Hours: Monday - Saturday, 10:00 AM - 6:00 PM IST</p>

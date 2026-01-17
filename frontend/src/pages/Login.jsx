@@ -54,7 +54,7 @@ const Login = () => {
                     </button>
                 </form>
                 <p className="mt-8 text-center text-neutral-500">
-                    New to RSKIAA? <Link to="/register" className="text-accent hover:underline">Create an account</Link>
+                    New to Rskiaa? <Link to="/register" className="text-accent hover:underline">Create an account</Link>
                 </p>
             </div>
         </div>

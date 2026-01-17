@@ -10,7 +10,7 @@ const Footer = () => {
                     <div className="col-span-1 md:col-span-1">
                         <Link to="/" className="flex items-center space-x-2 mb-6">
                             <Palette className="w-8 h-8 text-accent" />
-                            <span className="text-2xl title-font font-bold tracking-wider uppercase">RSKIAA</span>
+                            <span className="text-2xl title-font font-bold tracking-wider uppercase">Rskiaa</span>
                         </Link>
                         <p className="text-neutral-500 mb-6">
                             Bringing the world's most exquisite contemporary art to your doorstep. Each piece is authenticated and hand-selected.
@@ -59,7 +59,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="border-t border-white/5 pt-8 text-center text-neutral-600 text-sm">
-                    © 2026 RSKIAA Gallery Inc. All rights reserved.
+                    © 2026 Rskiaa Gallery Inc. All rights reserved.
                 </div>
             </div>
         </footer>

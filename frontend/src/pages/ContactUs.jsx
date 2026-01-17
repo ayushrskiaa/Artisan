@@ -173,9 +173,9 @@ const ContactUs = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Visit Us</h3>
                                         <p className="text-neutral-400 text-sm">
-                                            RSKIAA Gallery<br />
-                                            123 Art Street, Creative District<br />
-                                            Mumbai, Maharashtra 400001<br />
+                                            Rskiaa Gallery<br />
+                                            Bengaluru<br />
+                                            Karnataka<br />
                                             India
                                         </p>
                                     </div>

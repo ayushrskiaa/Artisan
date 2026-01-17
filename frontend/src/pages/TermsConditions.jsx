@@ -31,7 +31,7 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
                             <p>
-                                By accessing and using RSKIAA Gallery website, you accept and agree to be bound by the terms and
+                                By accessing and using Rskiaa Gallery website, you accept and agree to be bound by the terms and
                                 provisions of this agreement. If you do not agree to these terms, please do not use our services.
                             </p>
                         </section>
@@ -104,7 +104,7 @@ const TermsConditions = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">8. Intellectual Property</h2>
                             <p>
                                 All content on this website, including text, graphics, logos, images, and artwork, is the property
-                                of RSKIAA Gallery or its content suppliers and is protected by copyright laws. You may not reproduce,
+                                of Rskiaa Gallery or its content suppliers and is protected by copyright laws. You may not reproduce,
                                 distribute, or create derivative works without our express written permission.
                             </p>
                         </section>
@@ -124,7 +124,7 @@ const TermsConditions = () => {
                         <section>
                             <h2 className="text-2xl font-bold text-white mb-4">10. Limitation of Liability</h2>
                             <p>
-                                To the fullest extent permitted by law, RSKIAA Gallery shall not be liable for any indirect,
+                                To the fullest extent permitted by law, Rskiaa Gallery shall not be liable for any indirect,
                                 incidental, special, consequential, or punitive damages arising out of your use of our website or services.
                             </p>
                         </section>
@@ -149,7 +149,7 @@ const TermsConditions = () => {
                             <h2 className="text-2xl font-bold text-white mb-4">13. Contact Information</h2>
                             <p className="mb-3">For questions about these Terms & Conditions, please contact us:</p>
                             <div className="glass p-4 rounded-xl">
-                                <p className="font-bold text-accent">RSKIAA Gallery</p>
+                                <p className="font-bold text-accent">Rskiaa Gallery</p>
                                 <p>Email: ashutoshrskiaa@gmail.com</p>
                                 <p>Phone: +91 9507515702</p>
                             </div>
