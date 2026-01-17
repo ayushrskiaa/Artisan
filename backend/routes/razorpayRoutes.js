@@ -17,6 +17,25 @@ router.post('/create-order', protect, async (req, res) => {
     try {
         const { amount, currency = 'INR', receipt } = req.body;
 
+        // Validate API keys
+        if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+            console.error('Razorpay API keys are not configured');
+            return res.status(500).json({ 
+                success: false, 
+                message: 'Razorpay API keys are not configured properly'
+            });
+        }
+
+        // Validate amount
+        if (!amount || amount <= 0) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Invalid amount provided'
+            });
+        }
+
+        console.log('Creating Razorpay order with:', { amount, currency, receipt });
+
         const options = {
             amount: amount * 100, // Razorpay expects amount in paise
             currency,
@@ -25,6 +44,8 @@ router.post('/create-order', protect, async (req, res) => {
         };
 
         const order = await razorpay.orders.create(options);
+        
+        console.log('Razorpay order created successfully:', order.id);
         
         res.json({
             success: true,
@@ -35,10 +56,17 @@ router.post('/create-order', protect, async (req, res) => {
         });
     } catch (error) {
         console.error('Razorpay order creation error:', error);
+        console.error('Error details:', {
+            message: error.message,
+            description: error.error?.description,
+            code: error.error?.code,
+            statusCode: error.statusCode
+        });
         res.status(500).json({ 
             success: false, 
             message: 'Failed to create Razorpay order',
-            error: error.message 
+            error: error.message,
+            details: error.error?.description || 'Please check your Razorpay API keys and account status'
         });
     }
 });

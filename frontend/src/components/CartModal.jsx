@@ -114,7 +114,6 @@ const CartModal = ({ isOpen, onClose }) => {
 
                                 await axios.post(`${import.meta.env.VITE_API_URL}/orders`, orderDataWithPayment, config);
 
-                                alert('Payment successful! Order placed.');
                                 clearCart();
                                 onClose();
                                 navigate('/success');
