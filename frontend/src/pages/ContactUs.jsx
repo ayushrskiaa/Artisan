@@ -174,8 +174,9 @@ const ContactUs = () => {
                                         <h3 className="font-bold mb-1">Visit Us</h3>
                                         <p className="text-neutral-400 text-sm">
                                             Rskiaa Gallery<br />
-                                            Bengaluru<br />
-                                            Karnataka<br />
+                                            SLS Splendor<br />
+                                            Belandur, Bangalore<br />
+                                            Karnataka, 560103<br />
                                             India
                                         </p>
                                     </div>
@@ -183,23 +184,6 @@ const ContactUs = () => {
                             </div>
                         </div>
 
-                        <div className="glass rounded-3xl p-8">
-                            <h2 className="text-2xl font-bold mb-4">Business Hours</h2>
-                            <div className="space-y-3 text-neutral-300">
-                                <div className="flex justify-between">
-                                    <span>Monday - Friday</span>
-                                    <span className="text-accent font-bold">10:00 AM - 6:00 PM</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Saturday</span>
-                                    <span className="text-accent font-bold">10:00 AM - 4:00 PM</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Sunday</span>
-                                    <span className="text-neutral-500">Closed</span>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="glass rounded-3xl p-8">
                             <h2 className="text-2xl font-bold mb-4">Quick Links</h2>

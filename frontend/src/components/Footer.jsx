@@ -16,7 +16,14 @@ const Footer = () => {
                             Bringing the world's most exquisite contemporary art to your doorstep. Each piece is authenticated and hand-selected.
                         </p>
                         <div className="flex space-x-4">
-                            <Instagram className="w-5 h-5 text-neutral-400 hover:text-accent cursor-pointer transition-colors" />
+                            <a
+                                href="https://www.instagram.com/ashutosh_rskiaa/?utm_source=qr&igsh=YXE0b2p4MzYycDIz"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                            >
+                                <Instagram className="w-5 h-5 text-neutral-400 hover:text-accent cursor-pointer transition-colors" />
+                            </a>
                             <Twitter className="w-5 h-5 text-neutral-400 hover:text-accent cursor-pointer transition-colors" />
                             <Github className="w-5 h-5 text-neutral-400 hover:text-accent cursor-pointer transition-colors" />
                         </div>

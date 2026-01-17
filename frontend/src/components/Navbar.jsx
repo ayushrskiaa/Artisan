@@ -26,7 +26,7 @@ const Navbar = () => {
                     <div className="flex justify-between h-20 items-center">
                         <Link to="/" className="flex items-center space-x-2 group">
                             <Palette className="w-8 h-8 text-accent group-hover:rotate-12 transition-transform" />
-                            <span className="text-2xl title-font font-bold tracking-wider">Rskiaa</span>
+                            <span className="text-3xl title-font font-bold tracking-wider">Rskiaa</span>
                         </Link>
 
                         {/* Desktop Links */}
