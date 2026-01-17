@@ -31,7 +31,7 @@ const Navbar = () => {
                                 alt="Rskiaa Logo"
                                 className="w-12 h-12 rounded-full object-cover  group-hover:border-accent transition-all group-hover:scale-110"
                             />
-                            <span className="text-3xl title-font font-bold tracking-wider">Rskiaa</span>
+                            <span className="text-3xl gradient-text italic font-bold tracking-wider">Rskiaa</span>
                         </Link>
 
                         {/* Desktop Links */}

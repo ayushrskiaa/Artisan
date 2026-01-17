@@ -97,13 +97,13 @@ const Hero = ({ masterpiece }) => {
                                 <div className="absolute inset-0 rounded-2xl border-2 border-accent/20"></div>
 
                                 {/* The Artwork */}
-                                <div className="aspect-[5/4] rounded-xl overflow-hidden shadow-2xl relative group bg-black">
+                                <Link to={`/painting/${masterpiece?._id}`} className="block aspect-[5/4] rounded-xl overflow-hidden shadow-2xl relative group bg-black cursor-pointer">
                                     <img
                                         src={masterpiece?.imageUrl || "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000&auto=format&fit=crop"}
                                         alt={masterpiece?.title || "Main Art"}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                     />
-                                </div>
+                                </Link>
                             </div>
 
                             {/* Artwork Info Box - Below Image */}
