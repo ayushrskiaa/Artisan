@@ -99,8 +99,8 @@ const Hero = ({ masterpiece }) => {
                                 {/* The Artwork */}
                                 <Link to={`/painting/${masterpiece?._id}`} className="block aspect-[5/4] rounded-xl overflow-hidden shadow-2xl relative group bg-black cursor-pointer">
                                     <img
-                                        src={masterpiece?.imageUrl || "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000&auto=format&fit=crop"}
-                                        alt={masterpiece?.title || "Main Art"}
+                                        src={masterpiece?.imageUrl}
+                                        alt={masterpiece?.title}
                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                     />
                                 </Link>
